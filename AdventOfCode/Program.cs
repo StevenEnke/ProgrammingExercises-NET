@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Reflection;
 
 namespace AdventOfCode
 {
@@ -36,12 +38,20 @@ namespace AdventOfCode
             do
             {
                 Console.WriteLine("    1) Report Repair");
-                Console.WriteLine("Choose a Day: ");
+                Console.Write("Choose a Day: ");
                 userInput = Console.ReadLine();
 
                 if (userInput.TrimStart().StartsWith('1'))
                 {
+                    var inputFile = Console.ReadLine();
+                    if(String.IsNullOrWhiteSpace(inputFile))
+                    {
+                        inputFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "2020", "Inputs", "Day1RepairReport");
+                        Console.WriteLine($"Path not given. Defaulting to: {inputFile}");
+                    }
 
+                    Console.WriteLine($"Result for 2nd Degree: {Day1ReportRepair.FixExpenseReport2ndDegree(inputFile)}");
+                    Console.WriteLine($"Result for 3rd Degree: {Day1ReportRepair.FixExpenseReport3rdDegree(inputFile)}");
                 }
             } while (!IsExitCondition(userInput) && !IsBreakCondition(userInput));
         }
