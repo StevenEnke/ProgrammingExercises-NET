@@ -38,11 +38,13 @@ namespace AdventOfCode
             do
             {
                 Console.WriteLine("    1) Report Repair");
+                Console.WriteLine("    2) Password Philosophy");
                 Console.Write("Choose a Day: ");
                 userInput = Console.ReadLine();
 
                 if (userInput.TrimStart().StartsWith('1'))
                 {
+                    Console.Write("Enter file path: ");
                     var inputFile = Console.ReadLine();
                     if(String.IsNullOrWhiteSpace(inputFile))
                     {
@@ -52,6 +54,18 @@ namespace AdventOfCode
 
                     Console.WriteLine($"Result for 2nd Degree: {Day1ReportRepair.FixExpenseReport2ndDegree(inputFile)}");
                     Console.WriteLine($"Result for 3rd Degree: {Day1ReportRepair.FixExpenseReport3rdDegree(inputFile)}");
+                }
+                else if(userInput.TrimStart().StartsWith('2'))
+                {
+                    Console.Write("Enter file path: ");
+                    var inputFile = Console.ReadLine();
+                    if(String.IsNullOrWhiteSpace(inputFile))
+                    {
+                        inputFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "2020", "Inputs", "Day2PasswordPhilosophy");
+                        Console.WriteLine($"Path not given. Defaulting to: {inputFile}");
+                    }
+
+                    Console.WriteLine($"Number of valid passwords: {Day2PasswordPhilosophy.PasswordValidator(inputFile)}");
                 }
             } while (!IsExitCondition(userInput) && !IsBreakCondition(userInput));
         }
