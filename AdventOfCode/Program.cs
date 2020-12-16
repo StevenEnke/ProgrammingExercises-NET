@@ -65,7 +65,8 @@ namespace AdventOfCode
                         Console.WriteLine($"Path not given. Defaulting to: {inputFile}");
                     }
 
-                    Console.WriteLine($"Number of valid passwords: {Day2PasswordPhilosophy.PasswordValidator(inputFile)}");
+                    Console.WriteLine($"Number of valid passwords (range policy): {Day2PasswordPhilosophy.PasswordRangeValidator(inputFile)}");
+                    Console.WriteLine($"Number of valid passwords (position policy): {Day2PasswordPhilosophy.PasswordPositionValidator(inputFile)}");
                 }
             } while (!IsExitCondition(userInput) && !IsBreakCondition(userInput));
         }
