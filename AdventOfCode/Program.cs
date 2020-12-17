@@ -39,6 +39,7 @@ namespace AdventOfCode
             {
                 Console.WriteLine("    1) Report Repair");
                 Console.WriteLine("    2) Password Philosophy");
+                Console.WriteLine("    3) Toboggan Trajectory");
                 Console.Write("Choose a Day: ");
                 userInput = Console.ReadLine();
 
@@ -67,6 +68,19 @@ namespace AdventOfCode
 
                     Console.WriteLine($"Number of valid passwords (range policy): {Day2PasswordPhilosophy.PasswordRangeValidator(inputFile)}");
                     Console.WriteLine($"Number of valid passwords (position policy): {Day2PasswordPhilosophy.PasswordPositionValidator(inputFile)}");
+                }
+                else if (userInput.TrimStart().StartsWith('3'))
+                {
+                    Console.Write("Enter file path: ");
+                    var inputFile = Console.ReadLine();
+                    if (String.IsNullOrWhiteSpace(inputFile))
+                    {
+                        inputFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "2020", "Inputs", "Day3TobogganTrajectory");
+                        Console.WriteLine($"Path not given. Defaulting to: {inputFile}");
+                    }
+
+                    Console.WriteLine($"Number of trees passed: {Day3TobogganTrajectory.TravelerTreeCounter(inputFile)}");
+                    Console.WriteLine($"Number of trees passed: {Day3TobogganTrajectory.TravelerTreeMultiplier(inputFile)}");
                 }
             } while (!IsExitCondition(userInput) && !IsBreakCondition(userInput));
         }
