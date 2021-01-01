@@ -8,14 +8,14 @@ namespace AdventOfCode
 {
     class Program
     {
-        private static IEnumerable<string> exitOptions = new List<string>
+        private static readonly IEnumerable<string> exitOptions = new List<string>
         {
             "exit",
             "quit",
             ":q"
         };
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine($"You may exit at anytime using {string.Join(", ", exitOptions)}");
 
@@ -40,6 +40,7 @@ namespace AdventOfCode
                 Console.WriteLine("    1) Report Repair");
                 Console.WriteLine("    2) Password Philosophy");
                 Console.WriteLine("    3) Toboggan Trajectory");
+                Console.WriteLine("    4) Validate Passports");
                 Console.Write("Choose a Day: ");
                 userInput = Console.ReadLine();
 
@@ -81,6 +82,19 @@ namespace AdventOfCode
 
                     Console.WriteLine($"Number of trees passed: {Day3TobogganTrajectory.TravelerTreeCounter(inputFile)}");
                     Console.WriteLine($"Number of trees passed: {Day3TobogganTrajectory.TravelerTreeMultiplier(inputFile)}");
+                }
+                else if (userInput.TrimStart().StartsWith('4'))
+                {
+                    Console.Write("Enter file path: ");
+                    var inputFile = Console.ReadLine();
+                    if (String.IsNullOrWhiteSpace(inputFile))
+                    {
+                        inputFile = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "2020", "Inputs", "Day4PassportProcessing");
+                        Console.WriteLine($"Path not given. Defaulting to: {inputFile}");
+                    }
+
+                    Console.WriteLine($"Number of valid passports: {Day4PassportProcessing.HasExpectedEntries(inputFile)}");
+                    Console.WriteLine($"Number of valid passports: {Day4PassportProcessing.HasValidEntries(inputFile)}");
                 }
             } while (!IsExitCondition(userInput) && !IsBreakCondition(userInput));
         }
